@@ -200,7 +200,7 @@
 						</tr>
 					</table>
 				</div>
-				<div id="section2" style="display:none;">
+				<div id="section2" style="">
 					<table class="table" style="width: 100%;">
 						<tr>
 							<td style="vertical-align:top; width: 30%;">
@@ -208,7 +208,10 @@
 							</td>
 							<td style="vertical-align:top; width: 70%;">
 							<div id="masterproduct">
-								<div class="formproduct" style="padding-bottom: 24px; display:flex; justify-content:space-between; flex-wrap:wrap;">
+                                <div class="formproduct" style="position:relative; padding-bottom: 24px; display:flex; justify-content:space-between; flex-wrap:wrap;">
+                                <div class="hapus_baris" style="position: absolute; display:none; left:-24px; top:43px; color:#fff; background:red; border-radius:50%; padding:0px 6px;">
+                                    <span>-</span>
+                                </div>
 									<div class="product" style="width:70%;">
 										<label for="product">
 										<p>Product<span style="color: red;">*</span></p>
@@ -248,8 +251,6 @@
                                             <div style="width: 100%;"><hr></div>
                                             <div style="width:50%;">Total Nett Price</div><div style="width:50%; text-align:right;" class="nettprice">0</div>
                                         </div>
-                                        
-                                    
 								</div>
 							</div>
 							<div>
@@ -290,6 +291,8 @@ var product = {
 select_product(0);
 coba();
 function coba(){
+var baris = document.getElementsByClassName('formproduct');
+var hapus_baris = document.getElementsByClassName('hapus_baris');
 var select_product = document.getElementsByClassName('select_product');
 var select_unit = document.getElementsByClassName('select_unit');
 var in_qty = document.getElementsByClassName('in_qty');
@@ -301,6 +304,9 @@ var in_qty = document.getElementsByClassName('in_qty');
 			unit(index,select);
 			price(index,select);
 			total_price(index);
+		  }
+          hapus_baris[i].onclick = function(){
+            baris[index].remove();
 		  }
 		  select_unit[i].onchange = function(){
           var select = select_unit[index].selectedIndex;
@@ -346,6 +352,7 @@ function reset_product(data){
     for (i = length-1; i >= 0; i--) {
         select.options[i] = null;
     }
+    document.getElementsByClassName("hapus_baris")[data].style.display = "";
     document.getElementsByClassName("in_totalprice")[data].value = 0;
 	document.getElementsByClassName("in_price")[data].value = 0;
 	document.getElementsByClassName("in_qty")[data].value = "";
