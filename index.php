@@ -124,10 +124,10 @@
 		}
 	}
 
-	//$send = curl("http://dummy.restapiexample.com/api/v1/employees");
+	$send = curl("http://dummy.restapiexample.com/api/v1/employees");
 
 	// mengubah JSON menjadi array
-	// $data = json_decode($send, TRUE);
+	$data = json_decode($send, TRUE);
 	?>
 	<div id="content">
 		<h1>Create Order</h1>
@@ -147,12 +147,11 @@
 									<select style="width:70%;" class="select2" name="nama" id="name" onchange="dist()">
 										<option value="">Name</option>
 										<?php
-										$tes = array('nama 1', 'nama 2', 'nama 3');
-										if (!empty($tes)) {
-											foreach ($tes as $value) {
-												echo '<option value="' . $value . '">' . $value . '</option>';
-											}
-										}
+                                        if(!empty($data)){
+                                            foreach ($data['data'] as $value){
+                                                echo '<option value="' . $value['employee_name'] . '">' . $value['employee_name'] . '</option>';
+                                            }
+                                        }
 										?>
 									</select>
 								</div>
